@@ -41,9 +41,9 @@ public class QBClient {
 	public static void main(String[] args) {
 		QBClient parserXML  = new QBClient();
 		//parserXML.execute();
-		parserXML.executeUsers();
-		parserXML.executeGroups();
-		parserXML.executeMemberships();
+		parserXML.getQBUsers();
+		parserXML.getQBGroups();
+		parserXML.getQBMemberships();
 		try {
 		parserXML.getData();
 		
@@ -100,8 +100,13 @@ public class QBClient {
 	      
 	      
 	      
-	      
-	      private String callQBRestEndpoint(String url) throws Exception {
+	      /**
+	       * This is a method thet can be used to do GET requests 
+	       * @param url
+	       * @return
+	       * @throws Exception
+	       */
+	      private String getMethodRestCall(String url) throws Exception {
 	      	
 	      	//String url = "https://openam-priceindustries-nane1-dev.id.forgerock.io/openidm/managed/alpha_user?";
 	        	System.out.println("URL: " + url);
@@ -210,8 +215,10 @@ public class QBClient {
 	      
 	      
 	      
-	      
-	  public void executeUsers() {
+	  /**
+	   * 
+	   */
+	  public void getQBUsers() {
 
 	      // Instantiate the Factory
 	      DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -239,7 +246,7 @@ public class QBClient {
 	          System.out.println("------");
 	          
 	          if (doc.hasChildNodes()) {
-	              printUserNode(doc.getChildNodes());
+	              traverseUserNode(doc.getChildNodes());
 	          }
 	      } catch (ParserConfigurationException | SAXException | IOException e) {
 	          e.printStackTrace();
@@ -247,7 +254,7 @@ public class QBClient {
 
 	  }
 
-	  private void printUserNode(NodeList nodeList) {
+	  private void traverseUserNode(NodeList nodeList) {
 		   System.out.println(" number of nodes :" + nodeList.getLength());
 		   for (int temp = 0; temp < nodeList.getLength(); temp++) {
 			   
@@ -278,7 +285,7 @@ public class QBClient {
 
 	  }
 	  
-	  public void executeGroups() {
+	  public void getQBGroups() {
 
 	      // Instantiate the Factory
 	      DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -305,7 +312,7 @@ public class QBClient {
 	          System.out.println("------");
 	          
 	          if (doc.hasChildNodes()) {
-	              printGroupNode(doc.getChildNodes());
+	              traverseGroupNode(doc.getChildNodes());
 	          }
 	      } catch (ParserConfigurationException | SAXException | IOException e) {
 	          e.printStackTrace();
@@ -313,7 +320,7 @@ public class QBClient {
 
 	  }
 
-	  private void printGroupNode(NodeList nodeList) {
+	  private void traverseGroupNode(NodeList nodeList) {
 		   System.out.println(" number of nodes :" + nodeList.getLength());
 		   for (int temp = 0; temp < nodeList.getLength(); temp++) {
 			   
@@ -343,7 +350,7 @@ public class QBClient {
 	  }
 
 	
-	  public void executeMemberships() {
+	  public void getQBMemberships() {
 
 	      // Instantiate the Factory
 	      DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
